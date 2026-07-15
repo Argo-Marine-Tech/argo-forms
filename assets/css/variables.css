@@ -1,0 +1,15 @@
+:root {
+  --argo-blue: #073b68;
+  --argo-blue-dark: #042b4b;
+  --argo-blue-light: #eaf3fa;
+  --argo-orange: #f58220;
+  --argo-orange-dark: #cf620c;
+  --argo-bg: #f4f7fa;
+  --argo-ink: #183248;
+  --argo-muted: #5e7180;
+  --argo-line: #d5e0e7;
+  --argo-success: #18794e;
+  --argo-danger: #b42318;
+  --argo-radius: .85rem;
+  --argo-shadow: 0 8px 24px rgba(7, 59, 104, .09);
+}
