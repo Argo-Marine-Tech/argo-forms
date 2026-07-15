@@ -1,0 +1,32 @@
+@import url('variables.css');
+
+.form-shell { background: #fff; border: 1px solid var(--argo-line); border-radius: var(--argo-radius); box-shadow: var(--argo-shadow); padding: clamp(1.25rem, 3vw, 2rem); }
+.form-section + .form-section { border-top: 1px solid var(--argo-line); margin-top: 2rem; padding-top: 2rem; }
+.form-section-title { color: var(--argo-blue); font-size: 1.2rem; font-weight: 750; }
+.required { color: var(--argo-danger); }
+.form-label, legend { font-weight: 700; }
+.form-control, .form-select { border-color: #aebfca; min-height: 2.75rem; }
+.form-control:focus, .form-select:focus { border-color: var(--argo-blue); box-shadow: 0 0 0 .2rem rgba(7, 59, 104, .16); }
+.form-text { color: var(--argo-muted); }
+.bbs-checklist .accordion-button { color: var(--argo-blue); font-weight: 700; }
+.bbs-checklist .accordion-button:not(.collapsed) { background: var(--argo-blue-light); box-shadow: none; }
+.bbs-row { align-items: center; border-bottom: 1px solid #e4ebf0; display: grid; gap: 1rem; grid-template-columns: minmax(175px, 1fr) 200px 170px; padding: .85rem 0; }
+.bbs-row:last-child { border-bottom: 0; }
+.bbs-item { font-weight: 600; }
+.bbs-choice-label { color: var(--argo-muted); display: block; font-size: .73rem; font-weight: 700; letter-spacing: .06em; margin-bottom: .35rem; text-transform: uppercase; }
+.bbs-options { display: flex; gap: .4rem; }
+.bbs-options input { height: 1px; opacity: 0; position: absolute; width: 1px; }
+.bbs-options label { border: 1px solid #aebfca; border-radius: .35rem; cursor: pointer; font-size: .82rem; font-weight: 700; margin: 0; padding: .35rem .55rem; text-align: center; }
+.bbs-options input:focus + label { outline: 3px solid rgba(7,59,104,.2); outline-offset: 2px; }
+.bbs-options input:checked + label { background: var(--argo-success); border-color: var(--argo-success); color: #fff; }
+.bbs-options input[value="At-Risk"]:checked + label { background: var(--argo-danger); border-color: var(--argo-danger); }
+.bbs-options input[value="Yes"]:checked + label { background: #92400e; border-color: #92400e; }
+.bbs-options input[value="No"]:checked + label { background: #52677a; border-color: #52677a; }
+.upload-area { background: #f8fafc; border: 2px dashed #aebfca; border-radius: .6rem; padding: 1.1rem; }
+.photo-preview { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .75rem; }
+.photo-preview img { border: 1px solid var(--argo-line); border-radius: .35rem; height: 76px; object-fit: cover; width: 96px; }
+.signature-box { background: #f8fafc; border: 1px dashed #aebfca; border-radius: .55rem; padding: 1rem; }
+.signature-box input { background: transparent; border: 0; border-bottom: 1px solid #7d8c99; border-radius: 0; }
+.confirmation { background: #effaf3; border-left: 5px solid var(--argo-success); border-radius: .4rem; color: #155a35; padding: 1rem; }
+.confirmation[hidden], .group-error[hidden] { display: none; }
+@media (max-width: 767.98px) { .bbs-row { align-items: start; grid-template-columns: 1fr; gap: .6rem; }.bbs-options label { flex: 1; }.form-shell { border-left: 0; border-radius: 0; border-right: 0; } }
