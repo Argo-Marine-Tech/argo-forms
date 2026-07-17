@@ -1,75 +1,26 @@
 (() => {
-
-    "use strict";
-
-    const form = document.querySelector("#bbs-form");
-    const confirmation = document.querySelector("#confirmation");
-
-    form.addEventListener("submit", async (event) => {
-
-        event.preventDefault();
-
-        if (!form.checkValidity()) {
-
-            form.classList.add("was-validated");
-            return;
-
-        }
-
-        const submitButton = form.querySelector("button[type='submit']");
-
-        submitButton.disabled = true;
-        submitButton.innerText = "Submitting...";
-
-        try {
-
-            const data = {};
-
-            // Collect every field
-
-            new FormData(form).forEach((value, key) => {
-
-                data[key] = value;
-
-            });
-
-            // Send to Azure Function
-
-            const response = await window.Argo.API.submit(data);
-
-            confirmation.hidden = false;
-
-            confirmation.innerHTML = `
-                <div class="alert alert-success">
-                    <h5>Submission Successful</h5>
-                    <p>${response.message}</p>
-                    <strong>Submission ID:</strong><br>
-                    ${response.submissionId}
-                </div>
-            `;
-
-            form.reset();
-            form.classList.remove("was-validated");
-
-            confirmation.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-        catch (error) {
-
-            alert(error.message);
-
-        }
-
-        finally {
-
-            submitButton.disabled = false;
-            submitButton.innerText = "Submit";
-
-        }
-
-    });
-
+  'use strict';
+  const checklist = {
+    '1. PPE Usage': ['1.1 Head', '1.2 Eyes/Face', '1.3 Hearing', '1.4 Respiration', '1.5 Hands', '1.6 Feet', '1.7 Clothing', '1.8 Fall Protection', '1.9 Personal Flotation'],
+    '2. Situational Awareness': ['2.1 Location of person', '2.2 Watching where going', '2.3 Watching while doing', '2.4 Awareness of pinch-points', '2.5 Awareness of slips/trips/falls', '2.6 Awareness of Deck Openings', '2.7 Competence of Crew', '2.8 Standing in line of fire'],
+    '3. Activity': ['3.1 Lifting / Lowering', '3.10 Bunkering / Liquid Transfer', '3.11 Cargo Work', '3.12 Using Portable Tools / Machinery', '3.13 Using Heavy Machinery', '3.2 Pushing / Pulling', '3.3 Climbing up/down', '3.4 Cutting/Burning', '3.5 Rigging / Connecting / Lashing', '3.6 Galley work', '3.7 Working at Height / Over side', '3.8 Working under Loads', '3.9 Working in Confined Space'],
+    '4. Procedures': ['4.1 JSA/Toolbox/Job Preplanning', '4.2 Following Procedures', '4.3 Lock out/Tag out/Isolation', '4.4 Hot Work', '4.5 Confined Space', '4.6 Communications/Teamwork', '4.7 Pollution Prevention', '4.8 Waste Management'],
+    '5. Conditions / Environment': ['5.1 Lighting/Illumination', '5.10 Falling / Lowering Objects', '5.11 Sharp Edges', '5.12 Slippery Surfaces', '5.13 Hot/Cold Surfaces', '5.14 Loading / Back loading Cargo', '5.15 Cargo Stowage', '5.16 Chemicals / Hazardous Materials', '5.17 Weather / Sea Conditions', '5.18 Safe Escape', '5.2 Temperature', '5.3 Noise', '5.4 Housekeeping', '5.5 Flammable/Explosive', '5.6 Live Energy', '5.7 Dust', '5.8 Oxygen Content', '5.9 Pinch-Points'],
+    '6. Location': ['6.1 Alongside Dock', '6.2 On Sea Passage', '6.3 At Rig / Platform', '6.4 Alongside other vessel', '6.5 At Anchor', '6.6 Towing', '6.7 Anchor Operations', '6.8 Shipyard', '6.9 Other (client’s facility)'],
+    '7. Location on Vessel / Installation': ['7.1 Back Deck', '7.2 Bridge', '7.3 Accommodation', '7.4 Engine Room', '7.5 Galley', '7.6 Passageway / Stairwell', '7.7 Machinery Space', '7.8 Equipment Storage Space', '7.9 At Height / Over side'],
+    '8. Tools / Equipment': ['8.1 Tools / Machinery used to do job', '8.2 Condition of Tools / Machinery', '8.3 Inspection of Tools / Machinery', '8.4 Stowage of Tools', '8.5 Guards or Barriers on Tools / Machinery', '8.6 Barricading Placed around Areas', '8.7 Adequate Signage']
+  };
+  const form = document.querySelector('#bbs-form');
+  const checklistTarget = document.querySelector('#bbs-checklist');
+  const error = document.querySelector('#checklist-error');
+  const confirmation = document.querySelector('#confirmation');
+  const slug = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  checklistTarget.innerHTML = `<div class="accordion">${Object.entries(checklist).map(([group, items], section) => `<div class="accordion-item"><h3 class="accordion-header" id="bbs-heading-${section}"><button class="accordion-button ${section ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#bbs-section-${section}" aria-expanded="${section === 0}" aria-controls="bbs-section-${section}">${group}</button></h3><div id="bbs-section-${section}" class="accordion-collapse collapse ${section ? '' : 'show'}" aria-labelledby="bbs-heading-${section}"><div class="accordion-body">${items.map((item, index) => { const id = slug(`${section}-${index}-${item}`); return `<fieldset class="bbs-row"><legend class="visually-hidden">${item}</legend><div class="bbs-item">${item}</div><div><span class="bbs-choice-label">Observation</span><div class="bbs-options" role="radiogroup" aria-label="Observation for ${item}">${['Safe', 'At-Risk'].map((status) => `<input type="radio" id="${id}-${slug(status)}" name="assessment-${id}" value="${status}"><label for="${id}-${slug(status)}">${status}</label>`).join('')}</div></div><div><span class="bbs-choice-label">Stop Work</span><div class="bbs-options" role="radiogroup" aria-label="Stop Work for ${item}">${['Yes', 'No'].map((status) => `<input type="radio" id="${id}-stop-${slug(status)}" name="stop-${id}" value="${status}"><label for="${id}-stop-${slug(status)}">${status}</label>`).join('')}</div></div></fieldset>`; }).join('')}</div></div></div>`).join('')}</div>`;
+  const date = document.querySelector('#observation-date'); const time = document.querySelector('#observation-time');
+  window.Argo.setCurrentDateTime(date, time);
+  const checklistValid = () => { const valid = Boolean(form.querySelector('input[name^="assessment-"]:checked')); error.hidden = valid; return valid; };
+  form.addEventListener('submit', (event) => { event.preventDefault(); const valid = form.checkValidity() && checklistValid(); form.classList.add('was-validated'); if (!valid) { form.querySelector(':invalid, #checklist-error:not([hidden])')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; } confirmation.hidden = false; confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+  form.addEventListener('reset', () => { setTimeout(() => { form.classList.remove('was-validated'); confirmation.hidden = true; error.hidden = true; window.Argo.setCurrentDateTime(date, time); document.querySelector('#photo-preview').replaceChildren(); }, 0); });
+  document.querySelector('#photos').addEventListener('change', (event) => { const preview = document.querySelector('#photo-preview'); preview.replaceChildren(); [...event.target.files].forEach((file) => { if (!file.type.startsWith('image/')) return; const image = document.createElement('img'); image.alt = `Preview: ${file.name}`; image.src = URL.createObjectURL(file); image.onload = () => URL.revokeObjectURL(image.src); preview.append(image); }); });
+  form.addEventListener('change', checklistValid);
 })();
