@@ -11,7 +11,22 @@
   <nav class="navbar navbar-expand-lg navbar-dark site-nav" aria-label="Main navigation"><div class="container"><a class="navbar-brand d-flex align-items-center gap-2" href="../../" aria-label="ARGO Forms home"><img class="brand-logo" src="../../assets/images/Logo.png" alt="ARGO Marine"><span class="brand-divider"><strong>ARGO Marine</strong><span>Digital Forms Portal</span></span></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="mainNavigation"><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link" href="../../">Home</a></li><li class="nav-item"><a class="nav-link active" aria-current="page" href="./">BBS Observation</a></li></ul></div></div></nav>
   <div class="breadcrumb-wrap"><div class="container"><nav aria-label="Breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item active" aria-current="page">BBS Observation</li></ol></nav></div></div>
   <main id="main-content"><header class="page-title"><div class="container py-4"><p class="eyebrow mb-1"><i class="bi bi-shield-check me-1"></i>Safety</p><h1 class="h2 mb-2">Behaviour Based Safety Observation</h1><p>Digital version of the ARGO Behaviour Observation Card. Fields marked <span class="required">*</span> are required.</p></div></header>
-  <div class="container py-4 py-md-5"><div id="confirmation" class="confirmation mb-4" role="status" hidden><strong><i class="bi bi-check-circle-fill me-2"></i>Observation recorded.</strong> This GitHub Pages version validates the form locally; it does not send data to ARGO systems yet.</div>
+  <div class="container py-4 py-md-5">
+    <div id="confirmation"
+     class="confirmation mb-4"
+     role="status"
+     hidden>
+
+    <strong>
+        <i class="bi bi-check-circle-fill me-2"></i>
+        Submission Successful
+    </strong>
+
+    <div id="confirmation-message" class="mt-2">
+        Your observation has been submitted successfully.
+    </div>
+
+</div>
   <form id="bbs-form" class="form-shell" novalidate>
     <section class="form-section pt-0"><h2 class="form-section-title">1. Observation details</h2><div class="row g-3 mt-1"><div class="col-md-6"><label class="form-label" for="vessel-project">Vessel / project / location <span class="required">*</span></label><input class="form-control" id="vessel-project" name="vesselProject" maxlength="150" required><div class="invalid-feedback">Please enter the vessel, project or location.</div></div><div class="col-md-6"><label class="form-label" for="client">Client</label><input class="form-control" id="client" name="client" maxlength="100"></div><div class="col-md-6"><label class="form-label" for="observation-date">Date <span class="required">*</span></label><input class="form-control" id="observation-date" name="observationDate" type="date" required><div class="invalid-feedback">Please enter the observation date.</div></div><div class="col-md-6"><label class="form-label" for="reported-by">Reported by <span class="required">*</span></label><input class="form-control" id="reported-by" name="reportedBy" autocomplete="name" maxlength="100" required><div class="invalid-feedback">Please enter the reporter's name.</div></div><div class="col-md-6"><label class="form-label" for="observation-time">Time</label><input class="form-control" id="observation-time" name="observationTime" type="time"></div><div class="col-md-6"><label class="form-label" for="person-observed">Person observed</label><select class="form-select" id="person-observed" name="personObserved"><option value="">Select one (optional)</option><option>Employee</option><option>Contractor</option><option>Visitor</option></select></div></div></section>
     <section class="form-section"><h2 class="form-section-title">2. BBS checklist</h2><p class="text-secondary">Open a section and select Safe or At-Risk for each applicable item. Stop Work is recorded separately as Yes or No.</p><div id="bbs-checklist" class="bbs-checklist"></div><div class="group-error text-danger small mt-2" id="checklist-error" hidden>Select an assessment for at least one checklist item.</div></section>
