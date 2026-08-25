@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Provide additional information for an ARGO Marine Berth Application">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Additional Information | Berth Application | ARGO Forms</title>
+  <link rel="icon" href="../../../assets/icons/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="../../../assets/css/variables.css" rel="stylesheet">
+  <link href="../../../assets/css/style.css" rel="stylesheet">
+  <link href="../../../assets/css/forms.css" rel="stylesheet">
+  <link href="../../../assets/css/berth-additional-info.css" rel="stylesheet">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to form</a>
+
+  <nav class="navbar navbar-expand-lg navbar-dark site-nav" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="../../../" aria-label="ARGO Forms home">
+        <img class="brand-logo" src="../../../assets/images/Logo.png" alt="ARGO Marine">
+        <span class="brand-divider"><strong>ARGO Marine</strong><span>Digital Forms Portal</span></span>
+      </a>
+    </div>
+  </nav>
+
+  <main id="main-content" class="additional-info-page py-4 py-md-5">
+    <div class="container">
+      <article class="additional-info-card">
+        <header class="additional-info-heading">
+          <div>
+            <p class="eyebrow">BERTH APPLICATION</p>
+            <h1>Provide Additional Information</h1>
+            <p>Use this page only when Wharf Operations has requested additional information for an existing application.</p>
+          </div>
+          <img src="../../../assets/images/Logo-colour.png" alt="ARGO Marine">
+        </header>
+
+        <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+
+        <section id="request-access-section" class="content-section" hidden>
+          <h2>Secure access required</h2>
+          <p>Application reference: <strong id="request-submission-id"></strong></p>
+          <p>For security, ARGO will send a one-use access link to the email address already verified for this application. No application details are displayed until that link is used.</p>
+          <button id="request-access-button" class="btn btn-primary" type="button">
+            <i class="bi bi-envelope-lock" aria-hidden="true"></i>
+            Send secure access link
+          </button>
+          <p class="help-text">If you no longer have access to the email address used on the application, contact <a href="mailto:wharfops@argo.com.pg">wharfops@argo.com.pg</a>.</p>
+        </section>
+
+        <section id="loading-section" class="content-section" hidden>
+          <div class="loading-row"><span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span>Checking the secure access link…</span></div>
+        </section>
+
+        <section id="response-section" class="content-section" hidden>
+          <div class="application-summary">
+            <div><span>Submission ID</span><strong id="submission-id"></strong></div>
+            <div><span>Company</span><strong id="company-name"></strong></div>
+            <div><span>Vessel</span><strong id="vessel-name"></strong></div>
+          </div>
+
+          <div class="request-box">
+            <span>Wharf Operations requested:</span>
+            <p id="request-notes"></p>
+          </div>
+
+          <form id="additional-info-form" novalidate>
+            <label class="field" for="response-text">
+              <span>Your response</span>
+              <textarea id="response-text" rows="5" maxlength="5000" placeholder="Explain the additional information you are providing."></textarea>
+            </label>
+
+            <div class="upload-block">
+              <div>
+                <strong>Requested / supporting documents</strong>
+                <p>PDF, Word, Excel, JPG or PNG. Maximum 8 files, 8 MB each and 20 MB combined.</p>
+              </div>
+              <label class="upload-button" for="additional-files">
+                <i class="bi bi-paperclip" aria-hidden="true"></i>
+                Select files
+              </label>
+              <input id="additional-files" type="file" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png">
+              <ul id="file-list" class="file-list" aria-live="polite"></ul>
+            </div>
+
+            <p id="form-error" class="form-error" hidden></p>
+
+            <div class="actions">
+              <button id="submit-button" class="btn btn-primary btn-lg" type="submit">
+                Submit Additional Information
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section id="complete-section" class="content-section" hidden>
+          <div class="complete-icon"><i class="bi bi-check-circle-fill" aria-hidden="true"></i></div>
+          <h2>Additional information received</h2>
+          <p>Your response has been returned to Wharf Operations for review.</p>
+          <p>Application reference: <strong id="complete-submission-id"></strong></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <script src="../../../assets/js/api.js"></script>
+  <script src="../../../assets/js/forms/berth-additional-info.js"></script>
+</body>
+</html>
